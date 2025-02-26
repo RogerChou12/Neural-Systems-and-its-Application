@@ -72,7 +72,7 @@ for tim in range(3): # 3 training rounds with different radius sizes
         lr_t += 1
     print('epoch=' + str(lr_t) + '時weight:')
     print(topo)
-    #繪圖
+    # Plot
     drawn_tit = ['' for q in range(t)]
     dr_x = np.zeros([32,2])
     for i in range(len(x)):

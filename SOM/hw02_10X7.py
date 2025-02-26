@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 import math
-t = 70        # number of neurons
+t = 70 # number of neurons
 #R=3
 
 x = np.array([[1,0,0,0,0],[2,0,0,0,0],[3,0,0,0,0],[4,0,0,0,0],[5,0,0,0,0],
@@ -42,30 +42,31 @@ print (topo)
 d = np.zeros(t)
 lr_t = 0
 for tim in range(3):
-    R0 = 3-tim      # beginning radius
+    R0 = 3-tim  # Reduce radius
     epoch = 0
     
     while epoch <75:
-        LR = 0.1*math.exp(-1*(lr_t/1000))    #learning rate
+        LR = 0.1*math.exp(-1*(lr_t/1000)) # Decay learning rate
         if R0 == 1:
-            R = R0      # radius
+            R = R0 # radius
         else:
             t1 = 1000/math.log(R0)
-            R = R0*math.exp(-(lr_t/t1))      # radius
+            R = R0*math.exp(-(lr_t/t1)) # Reduce radius over time
         for k in range(32):
             for e in range(t):
                 d[e] = 0
-                for s in range(5):    #distance between input x and e-th neuron
+                for s in range(5): # Euclidean distance between input x and e-th neuron
                     d[e] += np.power((x[k,s]-topo[e,s]),2)     
                 d[e] = math.sqrt(d[e])
             min_index = np.argmin(d)   #Returns the indices of the minimum values along an axis.
             min_value = min(d)
-            ##print(min_index)
-            ##print(topo_map[min_index,:])
+            # print(min_index)
+            # print(topo_map[min_index,:])
             min_map_i = topo_map[min_index,0] # row of winner neuron in topo_map
             min_map_j = topo_map[min_index,1] # column of winner neuron in topo_map
-            #rint(len(topo_map))
-            h_qj = np.zeros(t)   # neighboring function
+            # print(len(topo_map))
+            # Update weights based on neighborhood function
+            h_qj = np.zeros(t)
             for i in range(t):
                 h_qj[i] = math.exp(-1*((np.power(topo_map[i,0]-min_map_i,2)+np.power(topo_map[i,1]-min_map_j,2))/(2*R*R)))
                 for j in range(5):
@@ -75,7 +76,7 @@ for tim in range(3):
     print("epoch="+str(lr_t)+'時weight:')
     print(topo)
     
-    #繪圖
+    # Plot
     drawn_tit = ['' for q in range(t)]
     dr_x = np.zeros([32,2])
     for i in range(len(x)):
