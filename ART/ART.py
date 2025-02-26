@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 23 09:42:39 2021
-
-@author: asus
-"""
 
 import matplotlib.pyplot as plt
 import data_x as s

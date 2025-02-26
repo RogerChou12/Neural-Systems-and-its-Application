@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 15 09:34:09 2021
-
-@author: ray29
-"""
 
 import numpy as np
 def data(i):

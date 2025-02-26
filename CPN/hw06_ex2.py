@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 29 21:00:54 2021
 
-@author: ray29
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 import random
