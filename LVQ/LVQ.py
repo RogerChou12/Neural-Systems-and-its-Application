@@ -17,14 +17,15 @@ w = np.array([[1,0,0,0,0],
              [3,3,6,1,0],
              [3,3,6,2,1]])  # initial weights
 w1 = w.transpose()
-w1=w1.astype(float)
+w1=w1.astype(float) # Convert weights into float format for precision
 print('initial weights=')
 print(w1)
-M = 6   # 6個類別
+M = 6   # 6 classes
 y = np.zeros([M,1])
 lr0 = 0.01
-cx = np.zeros([1,32])
-for i in range(32):   # 32筆資料分成6類
+cx = np.zeros([1,32]) # Class labels for training data
+for i in range(32):   # Divides the training data into 6 predefined classes
+    # Assigns each training sample to a class
     if i<5:
         cx[0,i] = 1
     if i>4 and i<10:
@@ -37,26 +38,27 @@ for i in range(32):   # 32筆資料分成6類
         cx[0,i] = 5
     if i>25:
         cx[0,i] = 6
-cw = np.array([1,2,3,4,5,6])  # 輸出6個類別
+cw = np.array([1,2,3,4,5,6])  # outputs: 6 classes
 
 # training
 for e in range(2000):
-    lr = lr0*math.exp(-1*(e/1000))
+    lr = lr0*math.exp(-1*(e/1000)) # Learning rate decays exponentially
     for d in range(32):
         dis = np.zeros([6,1])
         win = 0
         win_index = 0
         for i in range(M):
+            # Compute Euclidean distance
             dif = np.zeros([5,1])
             dif = np.power((Xin[:,d] - w1[:,i]),2)
             dis[i] = math.sqrt(np.sum(dif))
         win = min(dis)
-        win_index = np.argmin(dis)
+        win_index = np.argmin(dis) # Finds the neuron with the smallest distance (Winner Neuron)
         new = np.zeros([5,1])
-        if cw[win_index] == cx[0,d]:
+        if cw[win_index] == cx[0,d]: # If class matches, strengthen weights
             new = w1[:,win_index] + lr*(Xin[:,d]-w1[:,win_index])
             w1[:,win_index] = new
-        if cw[win_index] != cx[0,d]:
+        if cw[win_index] != cx[0,d]: # If class does not match, weaken weights
             new = w1[:,win_index] - lr*(Xin[:,d]-w1[:,win_index])
             w1[:,win_index] = new
 print('final weights=')
@@ -71,10 +73,10 @@ test = np.array([[6,0,0,0,0],
                  [3,3,6,2,7]])
 test1=test.transpose()
 # start testing
-result = np.zeros([6,6])
-# test*final weights
-for j in range(6):
-    for i in range(6):
+result = np.zeros([6,6]) # Store distances for classification
+# Compute Euclidean distance
+for j in range(6): # 6 testing samples
+    for i in range(6): # 6 classes
         test_dif = np.zeros([5,1])
         test_dif = np.power((test1[:,j] - w1[:,i]),2)
         result[j,i] = math.sqrt(np.sum(test_dif))
@@ -82,8 +84,8 @@ for j in range(6):
 win_c = np.zeros([6,1])  # output category
 win_c = win_c.astype(int)
 win_value = np.zeros([6,1])  # the value of the output category
-print('Result of testing')
+print('Results of testing')
 for i in range(6):  # find the correct category
-    win_value[i] = min(result[i,:])
+    win_value[i] = min(result[i,:]) # the smallest distance between testing samples and classes
     win_c[i] = np.argmin(result[i,:])
     print(str(test[i,:])+' -> category='+str(cw[win_c[i]]))
