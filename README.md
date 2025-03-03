@@ -21,3 +21,6 @@
 
 ## LVQ
 1. Training data: 32, each with 5 features
+2. 6 classes = 6 neurons
+3. Compute Euclidean distance between inputs and neurons
+4. Find the winner neuron. If class matches, strengthen weights.
