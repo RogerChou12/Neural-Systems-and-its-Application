@@ -9,7 +9,7 @@
    3-4. mean squared error  
 
 ## SOM
-1. Training data: 32, each with 5 features (A~Z & 1~6)
+1. Training data: 32, each with 5 features (A to Z & 1 to 6)
 2. Number of neurons: 7x7 or 10x7
 3. Training the SOM for 3 Iterations and reducing the neighborhood radius each time
 4. Train for 75 Epochs Per Round
