@@ -5,7 +5,7 @@ import numpy as np
 drawn_tit=['' for q in range(16)]
 tit=np.array(['井','五','亘','交','亢','云','了','予','乙','也','乏','乃','久','人','什','介'])
 
-x=np.zeros([16,70])
+x=np.zeros([16,70]) # 16 characters, each with a 70-dimensional binary feature vector
 
 for i in range(16):
     x[i,:]=s.data(i)
@@ -19,7 +19,7 @@ for f in range(16):
              plt.scatter(y+1,10-i,color='red',s=50,marker='s')  
     plt.axis([0,7.5,0,10.5])  #x-axis(min,max) y-axis(min,max)
 
-w=np.zeros([20,70])
+w=np.zeros([20,70]) # Stores learned cluster centers (max 20 clusters)
 w[0,:]=x[0,:]
 epoch=0
 thr=0.8   # thr=0.4 0.6 0.8 # Similarity threshold (higher = stricter clustering)
