@@ -44,3 +44,5 @@
 7. Find the winner neuron. If the class matches, strengthen weights.  
    >$`C_{w_q} = C_{x_j}, W_q(epoch+1)=W_q(epoch)+\eta*(X-W_q(epoch))`$  
    >$`C_{w_q} \neq C_{x_j}, W_q(epoch+1)=W_q(epoch)-\eta*(X-W_q(epoch))`$  
+## Adaptive Resonance Theory (ART)
+
