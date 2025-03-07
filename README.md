@@ -45,4 +45,12 @@
    >$`C_{w_q} = C_{x_j}, W_q(epoch+1)=W_q(epoch)+\eta*(X-W_q(epoch))`$  
    >$`C_{w_q} \neq C_{x_j}, W_q(epoch+1)=W_q(epoch)-\eta*(X-W_q(epoch))`$  
 ## Adaptive Resonance Theory (ART)
-
+1. Training data:16 Chinese characters, each with 70 binary features  
+2. Initialize the weights of the first cluster with the first character  
+   >$`W_0=X_0`$  
+3. Find he most similar cluster  
+   >$`Y[cluster]=(\displaystyle\sum_{i=0}^{69} W[cluster,i]*X[cluster,i])*W_{norm}[cluster]*y_{active}[cluster]`$  
+   >$`W_{norm}=\frac{1}{\sum W_{cluster}+0.5}`$  
+   >$`index_{winner}=argmax(Y)`$  
+4. Compute similarity score  
+   >$`v=\frac{\sum_{i=0}^{69} W[index_{winner},i]*X[character,i]}{\sum_{i=0}^{69} X[character,i]}`$  
