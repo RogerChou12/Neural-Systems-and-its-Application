@@ -27,16 +27,16 @@ clusters=1 # Number of clusters
 epoch_total=8 # Training epochs
 while epoch < epoch_total:    
     for character in range(16):
-        w_tid=np.zeros(clusters)
+        w_norm=np.zeros(clusters)
         for f in range(clusters):
-            w_tid[f]=1/(sum(w[f,:])+0.5)
+            w_norm[f]=1/(sum(w[f,:])+0.5)
         y=np.zeros(clusters) # Cluster activation values
         y_1=np.ones(clusters) # Activation status for clusters
         assigned=0 # determine if a character is assigned to a cluster
         count=0
         while assigned ==0:
             for cluster in range(clusters):
-                y[cluster]=sum(w[cluster,:]*x[character,:])*w_tid[cluster]*y_1[cluster]
+                y[cluster]=sum(w[cluster,:]*x[character,:])*w_norm[cluster]*y_1[cluster]
             
             max_index=np.argmax(y) # The most similar cluster
             v=sum(w[max_index,:]*x[character,:])/sum(x[character,:])   # Similarity score
