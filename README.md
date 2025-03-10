@@ -4,7 +4,7 @@
    >$`f(x,y)=3\sqrt{x+\pi}\sin{x}+\frac{\cos{y}}{y^2+1}, (x,y)\in(-\pi,\pi)`$  
 2. 5 neurons in hidden layer  
 3. Learning Rate decays
-   >$`\eta=\eta_0*\exp(-frac{epoch}{1000})`$  
+   >$`\eta=\eta_0*\exp(-\frac{epoch}{1000})`$  
 4. Different activation function
    >$`f(x)=x`$ (ReLU-like), $`f(x)=\tanh{x}`$  
 5. Compute error between between outputs and targets, then adjest bias and weights of output layer and hidden layer
