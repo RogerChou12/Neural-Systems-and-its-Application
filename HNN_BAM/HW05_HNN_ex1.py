@@ -25,21 +25,20 @@ for noise in range(1,11): # Iterate through noise levels (1 to 10 flipped bits)
             w=np.zeros([56,56]) # Initialize 56×56 weight matrix
             for t in memory:         
                 g=x[t,:].reshape(x[t,:].shape[0],1) # Convert row to column (56*1)
-                w+=np.multiply(x[t,:],g) # update weights
+                w+=np.multiply(x[t,:],g) # compute weights
             for i in range(56):
                 w[i,i]=0 # Prevents neurons from self-reinforcing
             testing_data=np.zeros([8,56])
             testing_data[:,:]=x[:,:]
 
             for i in range(8):
-                a=random.sample(range(0,56), noise) # 1~10 mistakes
+                flipped=random.sample(range(0,56), noise) # 1~10 mistakes
                 for t in range(noise):
-                    testing_data[i,a[t]]=-1*testing_data[i,a[t]] # Flip the selected bits
+                    testing_data[i,flipped[t]]=-1*testing_data[i,flipped[t]] # Flip the selected bits
             corr_tt=0 # Counter for correctly recalled patterns
             for i in memory:
                 thr=0 # Convergence flag
                 count=0
-    
                 testing_final=np.zeros(56) # Store the final stabilized state
                 while thr==0 and count!=20:
                     count+=1
@@ -53,11 +52,10 @@ for noise in range(1,11): # Iterate through noise levels (1 to 10 flipped bits)
                         elif x_til[t]==0:
                             testing_data[i,t]=testing_data[i,t]
                  
-            
-                    e=sum(np.absolute(testing_data[i,:]-testing_final[:])) # check if stable
+                    error=sum(np.absolute(testing_data[i,:]-testing_final[:])) # check if stable
             
                     testing_final[:]=testing_data[i,:]
-                    if e==0:
+                    if error==0:
                         thr=1 # Stop if no changes
                         
                 for f in memory:
