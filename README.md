@@ -54,3 +54,5 @@
    >$`index_{winner}=argmax(Y)`$  
 4. Compute similarity score  
    >$`v=\frac{\sum_{i=0}^{69} W[index_{winner},i]*X[character,i]}{\sum_{i=0}^{69} X[character,i]}`$  
+
+## Hopfield Neural Network
