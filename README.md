@@ -1,5 +1,7 @@
 # Neural System and its Application
 ## BPNN
+#### [BPNN_f(x)=x.py](BPNN/BPNN_f(x)=x.py) -> Simulate function with BPNN and activation function $`f(x)=x`$
+#### [BPNN_tanh(x).py](BPNN/BPNN_tanh(x).py) -> Simulate function with BPNN and activation function $`f(x)=\tanh{x}`$
 1. Simulate funtion f(x,y) with BPNN
    >$`f(x,y)=3\sqrt{x+\pi}\sin{x}+\frac{\cos{y}}{y^2+1}, (x,y)\in(-\pi,\pi)`$  
 2. 5 neurons in hidden layer  
@@ -17,6 +19,8 @@
    >$`MSE=\sqrt{\sum (f(x,y)-y_{output})^2}/numbers_{training-data}`$  
 
 ## Self-Organizing Map (SOM)
+#### [SOM_10X7.py](SOM/SOM_10X7.py) -> Generate a 10x7 topology of the data
+#### [SOM_7X7.py](SOM/SOM_7X7.py) -> Generate a 7x7 topology of the data
 1. Training data (X): 32, each with 5 features (A to Z & 1 to 6)
 2. Numbers of neurons(M): 7x7 or 10x7
 3. Training the SOM for 3 Iterations and reducing the neighborhood radius each time
@@ -35,6 +39,7 @@
       >$`W_j(epoch+1)=W_j(epoch)+\eta*h_{qj}(epoch)*(X(epoch)-W_j(epoch))`$  
 
 ## Learning Vector Quantization (LVQ)
+#### [LVQ.py](LVQ/LVQ.py)
 1. Training data: 32, each with 5 features
 2. 6 classes (M) = 6 neurons
 3. Learning Rate decays  
@@ -45,6 +50,7 @@
    >$`C_{w_q} = C_{x_j}, W_q(epoch+1)=W_q(epoch)+\eta*(X-W_q(epoch))`$  
    >$`C_{w_q} \neq C_{x_j}, W_q(epoch+1)=W_q(epoch)-\eta*(X-W_q(epoch))`$  
 ## Adaptive Resonance Theory (ART)
+#### [ART.py](ART/ART.py)
 1. Training data:16 Chinese characters, each with 70 binary features  
 2. Initialize the weights of the first cluster with the first character  
    >$`W_0=X_0`$  
@@ -55,4 +61,9 @@
 4. Compute similarity score  
    >$`v=\frac{\sum_{i=0}^{69} W[index_{winner},i]*X[character,i]}{\sum_{i=0}^{69} X[character,i]}`$  
 
-## Hopfield Neural Network
+## Hopfield Neural Network (HNN)
+#### [HNN_ex1.py](HNN_BAM/HNN_ex1.py) -> Introduce 1~10 random bit errors in stored patterns, then evaluate the recall accuracy when storing 2~8 patterns in a HNN
+#### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6-bit errors in stored patterns and use the HNN to recover the original patterns
+1.  56 neurons fully connected to each other (no self-connections)
+2.  Compute weights matrix
+   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T`$
