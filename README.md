@@ -64,11 +64,11 @@
 ## Hopfield Neural Network (HNN)
 #### [HNN_ex1.py](HNN_BAM/HNN_ex1.py) -> Introduce 1-10 random bit errors in stored patterns, then evaluate the recall accuracy when storing 2-8 patterns in a HNN
 #### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6-bit errors in stored patterns and use the HNN to recover the original patterns
-1.  56 neurons fully connected to each other (no self-connections)
-2.  Compute weights matrix
-   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=numbers of data}`$
-3. Recalling: Input a perturbed data
-   > Repeat with new output until convergence or 20 cycles  
+1. 56 neurons fully connected to each other (no self-connections)  
+2. Compute weights matrix  
+   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=numbers of data}`$  
+3. Recalling: Input a perturbed data  
+   >Repeat with new output until convergence or 20 cycles  
    >$`v=W*\tilde{X}`$  
    >$`\tilde{X}(epoch+1) =
         \begin{cases}
@@ -76,4 +76,28 @@
           \tilde{X}(epoch)  & \quad v=0\\
           -1  & \quad v<0
         \end{cases}
-      `$
+      `$  
+
+## Bi-Directional Associate Memory (BAM)
+#### [BAM_ex3.py](HNN_BAM/BAM_ex3.py) -> Stores 2–8 characters as associative pairs, introduces errors, and then recovers the original patterns
+1. There are 8 training input and output data pairs splitted from feature vectors (first 28 for input, last 28 for output)  
+2. Compute weights matrix (X=inputs, Y=outputs)  
+   >$`W=\displaystyle\sum_{n=1}^{N} Y_n*X_n^T, \text{ N=numbers of data}`$  
+3. Recalling: Input a perturbed data  
+   >Repeat with new output until convergence or 20 cycles  
+   >$`v=W*\tilde{X}`$  
+   >$`\tilde{Y}(n+1) =
+        \begin{cases}
+          1       & \quad v>0\\
+          \tilde{Y}(n)  & \quad v=0\\
+          -1  & \quad v<0
+        \end{cases}
+      `$  
+   $`u=W*\tilde{Y}(n+1)`$  
+   >$`\tilde{X}(n+2) =
+        \begin{cases}
+          1       & \quad v>0\\
+          \tilde{X}(n+1)  & \quad v=0\\
+          -1  & \quad v<0
+        \end{cases}
+      `$  
