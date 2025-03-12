@@ -63,7 +63,7 @@
 
 ## Hopfield Neural Network (HNN)
 #### [HNN_ex1.py](HNN_BAM/HNN_ex1.py) -> Introduce 1-10 random bit errors in stored patterns, then evaluate the recall accuracy when storing 2-8 patterns in a HNN
-#### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6-bit errors in stored patterns and use the HNN to recover the original patterns
+#### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6 errors in stored patterns and use the HNN to recover the original patterns
 1. 56 neurons fully connected to each other (no self-connections)  
 2. Compute weights matrix  
    >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=numbers of data}`$  
@@ -79,7 +79,9 @@
       `$  
 
 ## Bi-Directional Associate Memory (BAM)
-#### [BAM_ex3.py](HNN_BAM/BAM_ex3.py) -> Stores 2–8 characters as associative pairs, introduces errors, and then recovers the original patterns
+#### [BAM_ex3.py](HNN_BAM/BAM_ex3.py) -> Stores 2–8 characters as associative pairs, introduces 1-10 errors, and then recovers the original patterns
+#### [BAM_ex4.py](HNN_BAM/BAM_ex4.py) -> Compare results between forward recall (X(0)->Y(1)->...) and backward recall (Y(0)->X(1)->...) with 6 errors in 3 stored patterns
+#### [BAM_ex5.py](HNN_BAM/BAM_ex5.py) -> Use BAM to recover the original patterns with 6 errors in 4 stored patterns where Y=-1
 1. There are 8 training input and output data pairs splitted from feature vectors (first 28 for input, last 28 for output)  
 2. Compute weights matrix (X=inputs, Y=outputs)  
    >$`W=\displaystyle\sum_{n=1}^{N} Y_n*X_n^T, \text{ N=numbers of data}`$  
