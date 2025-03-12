@@ -16,7 +16,7 @@ for i in range(8):
         elif x[i,c]==0:
             x[i,c]=1
 time=1000 # Number of times to repeat the experiment for statistical accuracy
-corr=np.zeros([10,7]) # 8 data, 10 mistakes
+corr=np.zeros([10,7]) # 7 memory sizes, 10 mistakes
 for noise in range(1,11): # Iterate through noise levels (1 to 10 flipped bits)
     for test in range(2,9): # Number of training samples (2 to 8 characters)
         accuracy_t=np.zeros(time) # Stores accuracy for each trial
