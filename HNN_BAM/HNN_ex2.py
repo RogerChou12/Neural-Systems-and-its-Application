@@ -26,8 +26,8 @@ for f in range(8):
 
 w=np.zeros([56,56]) # Initialize 56×56 weight matrix
 for t in memory:         
-    g=x[t,:].reshape(x[t,:].shape[0],1) # Convert row to column (56*1)
-    w+=np.multiply(x[t,:],g) # compute weights
+    transpose_x=x[t,:].reshape(x[t,:].shape[0],1) # Convert row to column (56*1)
+    w+=np.multiply(x[t,:],transpose_x) # compute weights
 for i in range(56):
     w[i,i]=0 # Prevents neurons from self-reinforcing
 
@@ -75,7 +75,7 @@ for i in memory:
         thr_i=0
         thr_i=sum(np.absolute(testing_data[i,:]-x[f,:])) # Compare with original
         if thr_i==0:
-            print('testing data'+str(i+1)+'perturbed by '+tit[f])
+            print('testing data '+str(i+1)+' perturbed by '+tit[f])
 for f in memory:
     plt.figure(figsize=(3.5,5))
     for i in range(8):

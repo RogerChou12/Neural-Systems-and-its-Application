@@ -24,8 +24,8 @@ for noise in range(1,11): # Iterate through noise levels (1 to 10 flipped bits)
             memory=random.sample(range(0,8),test) # choose 2~8 numbers between 0 to 7
             w=np.zeros([56,56]) # Initialize 56×56 weight matrix
             for t in memory:         
-                g=x[t,:].reshape(x[t,:].shape[0],1) # Convert row to column (56*1)
-                w+=np.multiply(x[t,:],g) # compute weights
+                transpose_x=x[t,:].reshape(x[t,:].shape[0],1) # Convert row to column (56*1)
+                w+=np.multiply(x[t,:],transpose_x) # compute weights
             for i in range(56):
                 w[i,i]=0 # Prevents neurons from self-reinforcing
             testing_data=np.zeros([8,56])

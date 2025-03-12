@@ -4,7 +4,7 @@ import numpy as np
 import random
 np.set_printoptions(linewidth=400) # Ensures long NumPy arrays print in a single line
 np.set_printoptions(threshold=np.inf) # Prevents NumPy from truncating arrays
-memory=random.sample(range(0,8),4) # choose 4 data randomly
+
 x=np.zeros([8,56])
 tit=['五','亢','云','了','乙','乃','久','人'] # Chinese character labels
 for i in range(8):
@@ -17,7 +17,7 @@ for i in range(8):
             x[i,c]=1
 time=1000 # Repeats experiments 1000 times for reliable accuracy results
 corr=np.zeros([10,7]) # 7 memory sizes(2–8 stored characters), 10 noise levels
-for noise in range(1,11): # 10 mistakes
+for noise in range(1,11): # 1~10 noise points
     for test in range(2,9): # Number of patterns stored in memory: 2 to 8
         corr_t=np.zeros(time) # Stores accuracy for each trial
         for test_time in range(time):        
@@ -25,8 +25,8 @@ for noise in range(1,11): # 10 mistakes
             w=np.zeros([56-m,m])  # Initialize weight matrix
             memory=random.sample(range(0,8),test)  # choose 2~8 numbers between 0 to 7
             for t in memory:         
-                g=x[t,range(m,56)].reshape(x[t,range(m,56)].shape[0],1) # Convert row to column (28*1)
-                w+=np.multiply(x[t,range(0,m)],g) # Compute weights
+                transpose=x[t,range(m,56)].reshape(x[t,range(m,56)].shape[0],1) # Convert row to column (28*1)
+                w+=np.multiply(x[t,range(0,m)],transpose) # Compute weights
             testing_data=np.zeros([8,56])
             testing_data[:,:]=x[:,:]
 
