@@ -62,8 +62,18 @@
    >$`v=\frac{\sum_{i=0}^{69} W[index_{winner},i]*X[character,i]}{\sum_{i=0}^{69} X[character,i]}`$  
 
 ## Hopfield Neural Network (HNN)
-#### [HNN_ex1.py](HNN_BAM/HNN_ex1.py) -> Introduce 1~10 random bit errors in stored patterns, then evaluate the recall accuracy when storing 2~8 patterns in a HNN
+#### [HNN_ex1.py](HNN_BAM/HNN_ex1.py) -> Introduce 1-10 random bit errors in stored patterns, then evaluate the recall accuracy when storing 2-8 patterns in a HNN
 #### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6-bit errors in stored patterns and use the HNN to recover the original patterns
 1.  56 neurons fully connected to each other (no self-connections)
 2.  Compute weights matrix
-   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T`$
+   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=numbers of data}`$
+3. Recalling: Input a perturbed data
+   > Repeat with new output until convergence or 20 cycles  
+   >$`v=W*\tilde{X}`$  
+   >$`\tilde{X}(epoch+1) =
+        \begin{cases}
+          1       & \quad v>0\\
+          \tilde{X}(epoch)  & \quad v=0\\
+          -1  & \quad v<0
+        \end{cases}
+      `$
