@@ -66,7 +66,7 @@
 #### [HNN_ex2.py](HNN_BAM/HNN_ex2.py) -> Introduce 6 errors in stored patterns and use the HNN to recover the original patterns
 1. 56 neurons fully connected to each other (no self-connections)  
 2. Compute weights matrix  
-   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=numbers of data}`$  
+   >$`W=\displaystyle\sum_{n=1}^{N} X_n*X_n^T,\text{ } W_{ii}=0,\text{ } W_{ij}=W_{ji}, \text{ N=number of data}`$  
 3. Recalling: Input a perturbed data  
    >Repeat with new output until convergence or 20 cycles  
    >$`v=W*\tilde{X}`$  
@@ -84,7 +84,7 @@
 #### [BAM_ex5.py](HNN_BAM/BAM_ex5.py) -> Use BAM to recover the original patterns with 6 errors in 4 stored patterns where Y=-1
 1. There are 8 training input and output data pairs splitted from feature vectors (first 28 for input, last 28 for output)  
 2. Compute weights matrix (X=inputs, Y=outputs)  
-   >$`W=\displaystyle\sum_{n=1}^{N} Y_n*X_n^T, \text{ N=numbers of data}`$  
+   >$`W=\displaystyle\sum_{n=1}^{N} Y_n*X_n^T, \text{ N=number of data}`$  
 3. Recalling: Input a perturbed data  
    >Repeat with new output until convergence or 20 cycles  
    >$`v=W*\tilde{X}`$  
@@ -103,3 +103,19 @@
           -1  & \quad v<0
         \end{cases}
       `$  
+
+## Counterpropagation Network(CPN)
+#### [CPN_ex1.py](CPN/CPN_ex1.py) -> There are 10 hidden neurons, compare the performance between fixed-order inputs and random-order inputs
+#### [CPN_ex2.py](CPN/CPN_ex2.py) -> Compare the performance of differnet hidden neurons, 5 neurons and 10 neurons
+#### [CPN_ex3.py](CPN/CPN_ex3.py) -> Use CPN to classify and figure out the number of classes
+1. In CPN, hidden layer is called Kohonen layer (unsupervised learning) and output layer is called Grossberg layer (supervised learning)  
+2. Learning Rate decays
+   >Initial learning rate $`\eta_1=0.5, \eta_2=0.5`$  
+   >$`\eta=\eta_0*\exp(-\frac{epoch}{1000})`$  
+3. Kohonen layer: update the weights of winner neuron
+   >$`minD^j=min\| X-W^j \|, \text{ j=number of neurons}`$  
+   >$`W_{new}^j=W_{old}^j+\eta_1(X(t)-W_{old}^j)`$  
+4. Groosberg layer: update the weights of winnner neuron to output  
+   > The desired output=$`Y^d`$  
+   >$`\Pi_{new}^j=\Pi_{old}^j+\eta_2(Y^d(t)-\Pi_{old}^j)`$  
+5. Dynamically adds neurons to approximate complex functions if the distance to the nearest neuron and the approximation error exceed thresholds. (This step is unnecessary if the number of neurons is fixed from the beginning.)
