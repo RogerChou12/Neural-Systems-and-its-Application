@@ -6,8 +6,7 @@ import random
 import math
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
-def cpn (ij,w_1,w_2,N):
-    #print(ij)
+def cpn_output (ij,w_1,w_2,N):
     d=np.zeros(N)
     for e in range(N):
         d[e]=0
@@ -72,7 +71,7 @@ while epoch <60:
             w2=np.append (w2,data_f[k])
             N+=1
         #print(min_index)
-        mse_i+=np.power((cpn(data_i[k,:],w1,w2,N)-data_f[k]),2)
+        mse_i+=np.power((cpn_output(data_i[k,:],w1,w2,N)-data_f[k]),2)
 
     mse=math.sqrt(mse_i)/150
     mse_t[epoch]=mse 
@@ -89,7 +88,7 @@ plt.show()
 test_f=np.zeros(50)
 error = np.zeros(50)
 for i in range(150,200): 
-    test_f[i-150]=cpn(data_i[i,:],w1,w2,N)
+    test_f[i-150]=cpn_output(data_i[i,:],w1,w2,N)
     error[i-150] = abs(data_f[i]-test_f[i-150]) # difference between testing output and original output
 
 print('final number of hidden neurons = '+str(N))

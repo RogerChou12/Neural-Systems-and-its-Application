@@ -6,18 +6,18 @@ import random
 import math
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
-def cpn (ij,w_1,w_2,N):
-    #print(ij)
-    d=np.zeros(N)
-    for e in range(N):
-        d[e]=0
+def cpn_output (input,w_1,w_2,N):
+    distance=np.zeros(N)
+    for neuron in range(N):
+        distance[neuron]=0
         for s in range(2):
-            d[e]+=np.power((ij[s]-w_1[e,s]),2)     
-        d[e]=math.sqrt(d[e])
+            distance[neuron]+=np.power((input[s]-w_1[neuron,s]),2)     
+        distance[neuron]=math.sqrt(distance[neuron]) # Compute the distance between inputs and neurons
         
-    min_index=np.argmin(d)
+    min_index=np.argmin(distance) # Winner neuron
 
-    return w_2[min_index]
+    return w_2[min_index] # Returns the corresponding Grossberg weight
+
 data_i=np.zeros([200,2])
 data_f=np.zeros(200)
 for i in range(200):
@@ -33,9 +33,7 @@ ax.scatter(data_i[range(150,200),0],data_i[range(150,200),1],data_f[range(150,20
 plt.legend()
 plt.show()
 
-
-
-def cp (N):
+def cpn (N):
     w1=np.zeros([N,2])
     w2=np.zeros(N)
     for i in range(N):
@@ -79,7 +77,7 @@ def cp (N):
             w1[min_index,:]+=LR1*(data_i[k,:]-w1[min_index,:])
                          
             #print(min_index)
-            mse_i+=np.power((cpn(data_i[k,:],w1,w2,N)-data_f[k]),2)
+            mse_i+=np.power((cpn_output(data_i[k,:],w1,w2,N)-data_f[k]),2)
     
         mse=math.sqrt(mse_i)/150
         mse_t[epoch]=mse 
@@ -101,7 +99,7 @@ def cp (N):
     test_f=np.zeros(50)
     err_f=np.zeros(50)
     for i in range(150,200): 
-        test_f[i-150]=cpn(data_i[i,:],w1,w2,N)
+        test_f[i-150]=cpn_output(data_i[i,:],w1,w2,N)
         err_f[i-150]=abs(data_f[i]-test_f[i-150]) # difference between testing output and original output
     
     #print(w2)
@@ -128,5 +126,6 @@ def cp (N):
     plt.legend()
     plt.show()
     return 0
-cp(5)
-cp(10)    
+
+cpn(5) # Neurons=5
+cpn(10) # Neurons=10
