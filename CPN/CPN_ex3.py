@@ -78,7 +78,7 @@ while epoch <60:
 
 # Plot training data and weights of Kohonen layer
 plt.figure()
-plt.title('Weights')
+plt.title('WEIGHTS')
 plt.scatter(data_i[range(0,150),0],data_i[range(0,150),1], color='red',s=5,label='train')
 plt.scatter(w1[:,0],w1[:,1], color='blue',s=15,label='weights')
 plt.legend(loc='upper right')
@@ -95,7 +95,7 @@ print('Final number of hidden neurons = '+str(N))
 # Plot testing data and outputs
 fig1 = plt.figure()
 ap = fig1.add_subplot(111, projection='3d')
-plt.title('Result')
+plt.title('RESULTS')
 ap.scatter(data_i[range(150,200),0],data_i[range(150,200),1],data_f[range(150,200)],s=15,marker='o',label='original',facecolor=(0,0,0,0), edgecolor='black')
 ap.scatter(data_i[range(150,200),0],data_i[range(150,200),1],test_f[:], color='green',s=15,marker='x',label='result')
 plt.legend()
