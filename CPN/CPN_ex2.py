@@ -45,7 +45,7 @@ def cpn (N): # CPN with N neurons
     # Plot initial weights of Kohonen layer
     plt.figure()
     plt.title('Initial weights of Kohonen layer N='+str(N))
-    plt.scatter(data_i[:,0], data_i[:,1], color='red', s=5, label='data')
+    plt.scatter(data_i[range(0,150),0], data_i[range(0,150),1], color='red', s=5, label='data')
     plt.scatter(w1[:,0],w1[:,1], color='blue', s=15, label='Kohonen layer')
     plt.legend(loc='upper right')
     plt.show()
@@ -89,7 +89,7 @@ def cpn (N): # CPN with N neurons
     # Plot final weights of Kohonen layer
     plt.figure()
     plt.title('Final weights of Kohonen layer N='+str(N))
-    plt.scatter(data_i[:,0], data_i[:,1], color='red', s=5, label='data')
+    plt.scatter(data_i[range(0,150),0], data_i[range(0,150),1], color='red', s=5, label='data')
     plt.scatter(w1[:,0],w1[:,1], color='blue', s=15, label='Kohonen layer')
     plt.legend(loc='upper right')
     plt.show()
