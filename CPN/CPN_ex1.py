@@ -25,6 +25,7 @@ for i in range(200):
     data_i[i, 1]=random.uniform(-1*(math.pi),math.pi)
     data_f[i]=data_i[i, 1]*math.sinh(data_i[i, 0])+data_i[i, 1]*math.cosh(data_i[i, 0])
 
+# Plot training data and testing data
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 plt.title('Data')
@@ -42,7 +43,9 @@ for i in range(N):
     w11[i, 0]=w12[i, 0]=random.uniform(-1*(math.pi), math.pi)
     w11[i, 1]=w12[i, 0]=random.uniform(-1*(math.pi), math.pi)
     w21[i]=w22[i]=random.uniform(-40, 40)
-print('initail  weights of Grossberg layer')
+
+# Plot initial weights of Grossberg layer
+print('Initail  weights of Grossberg layer')
 print(w21)
 plt.figure()
 plt.title('Initial Weights')
@@ -53,7 +56,7 @@ plt.show()
 
 LR1_i=0.5 # Initial learning rate
 LR2_i=0.5
-mse=1
+mse=0
 epoch=0
 distance=np.zeros(N)
 
@@ -71,9 +74,9 @@ while epoch <60: # use fixed sequences of input data
         min_index=np.argmin(distance) # The smallest neurons
         w21[min_index]+=LR2*(data_f[k]-w21[min_index]) # Update weights of Grossberg layer
         w11[min_index,:]+=LR1*(data_i[k,:]-w11[min_index,:]) # Update weights of hidden layer (Kohonen layer)
-        mse_i+=np.power((cpn_output(data_i[k,:],w11,w21,N)-data_f[k]), 2)
+        mse_i+=np.power((cpn_output(data_i[k,:],w11,w21,N)-data_f[k]), 2) # Sum of MSE of outputs and targets
 
-    mse=math.sqrt(mse_i)/150
+    mse=math.sqrt(mse_i)/150 # MSE per epoch
     epoch+=1
 
 epoch=0
@@ -99,19 +102,21 @@ while epoch <60: # use random sequences of input data
     mse=math.sqrt(mse_i)/150 # Compute MSE between outputs and predictions
     epoch+=1
 
-print('final weights of Grossberg layer(fixed)')
+# Plot training data and final weights of Kohonen layer
+print('Final weights of Kohonen layer(fixed)')
 print(w21)
 plt.figure()
-plt.title('sequence of input is fixed')
+plt.title('Sequence of input is fixed')
 plt.scatter(data_i[:,0], data_i[:,1], color='red', s=5, label='train')
 plt.scatter(w11[:,0], w11[:,1], color='blue', s=15, label='weights')
 plt.legend(loc='upper right')
 plt.show()
 
-print('final weights of Grossberg layer(random)')
+print('Final weights of Grossberg layer(random)')
 print(w22)
+# Plot training data and final weights of Grossberg layer
 plt.figure()
-plt.title('sequence of input is random')
+plt.title('Sequence of input is random')
 plt.scatter(data_i[:,0], data_i[:,1], color='red', s=5, label='train')
 plt.scatter(w12[:,0],w12[:,1], color='blue', s=15, label='weights')
 plt.legend(loc='upper right')
@@ -124,19 +129,20 @@ for i in range(150,200):
     test_f1[i-150]=cpn_output(data_i[i,:], w11, w21, N)
     test_f2[i-150]=cpn_output(data_i[i,:], w12, w22, N)
 
-#print(w2)
-fi = plt.figure()
-ap = fi.add_subplot(111, projection='3d')
-plt.title('result(fixed sequence)')
+# Plot testing data, weights, outputs
+fig1 = plt.figure()
+ap = fig1.add_subplot(111, projection='3d')
+plt.title('Result(fixed sequence)')
 ap.scatter(data_i[range(150,200),0],data_i[range(150,200),1],data_f[range(150,200)],s=15,marker='o',facecolor=(0,0,0,0), edgecolor='black',label='original')
 ap.scatter(w11[:,0], w11[:,1], w21[:], color='red', s=15,marker='s', label='weights')
 ap.scatter(data_i[range(150,200),0],data_i[range(150,200),1],test_f1[:], color='green', s=15, marker='x', label='test')
 ap.legend()
 plt.show()
 
-fi2 = plt.figure()
-ap2 = fi2.add_subplot(111, projection='3d')
-plt.title('result(random sequence)')
+# Plot testing data, weights, outputs
+fig2 = plt.figure()
+ap2 = fig2.add_subplot(111, projection='3d')
+plt.title('Result(random sequence)')
 ap2.scatter(data_i[range(150,200),0], data_i[range(150,200),1], data_f[range(150,200)], s=15, marker='o', facecolor=(0,0,0,0), edgecolor='black', label='original')
 ap2.scatter(w12[:,0], w12[:,1], w22[:], color='red',s=15,marker='s',label='weights')
 ap2.scatter(data_i[range(150,200),0], data_i[range(150,200),1], test_f2[:], color='green', s=15,marker='x', label='test')
